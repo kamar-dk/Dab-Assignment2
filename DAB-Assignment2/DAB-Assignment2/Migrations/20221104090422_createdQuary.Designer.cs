@@ -3,6 +3,7 @@ using System;
 using DAB_Assignment2;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAB_Assignment2.Migrations
 {
     [DbContext(typeof(FacilitysContext))]
-    partial class FacilitysContextModelSnapshot : ModelSnapshot
+    [Migration("20221104090422_createdQuary")]
+    partial class createdQuary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.10");
@@ -34,6 +36,11 @@ namespace DAB_Assignment2.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FacilitysPK_FcName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FcName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Grill")
@@ -58,8 +65,7 @@ namespace DAB_Assignment2.Migrations
 
                     b.HasIndex("CityHallPersonelEmpId");
 
-                    b.HasIndex("FacilitysPK_FcName")
-                        .IsUnique();
+                    b.HasIndex("FacilitysPK_FcName");
 
                     b.ToTable("AvailableItems");
                 });
@@ -121,12 +127,6 @@ namespace DAB_Assignment2.Migrations
                     b.Property<string>("PK_FcName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("AvItemId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("BookingsBookingId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("CanBeBookedBy")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -143,12 +143,7 @@ namespace DAB_Assignment2.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RuleId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("PK_FcName");
-
-                    b.HasIndex("BookingsBookingId");
 
                     b.ToTable("Facilitys");
                 });
@@ -170,14 +165,17 @@ namespace DAB_Assignment2.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("fk_FcName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ÅbenIld")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("RuleId");
 
-                    b.HasIndex("FacilitysPK_FcName")
-                        .IsUnique();
+                    b.HasIndex("FacilitysPK_FcName");
 
                     b.ToTable("siteRules");
                 });
@@ -216,14 +214,16 @@ namespace DAB_Assignment2.Migrations
             modelBuilder.Entity("DAB_Assignment2.AvailableItems", b =>
                 {
                     b.HasOne("DAB_Assignment2.CityHallPersonel", "CityHallPersonel")
-                        .WithMany("AvailableItems")
+                        .WithMany()
                         .HasForeignKey("CityHallPersonelEmpId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DAB_Assignment2.Facilitys", "Facilitys")
-                        .WithOne("AvailableItems")
-                        .HasForeignKey("DAB_Assignment2.AvailableItems", "FacilitysPK_FcName");
+                        .WithMany()
+                        .HasForeignKey("FacilitysPK_FcName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CityHallPersonel");
 
@@ -237,18 +237,11 @@ namespace DAB_Assignment2.Migrations
                         .HasForeignKey("CityHallPersonelEmpId");
                 });
 
-            modelBuilder.Entity("DAB_Assignment2.Facilitys", b =>
-                {
-                    b.HasOne("DAB_Assignment2.Bookings", null)
-                        .WithMany("Facilitys")
-                        .HasForeignKey("BookingsBookingId");
-                });
-
             modelBuilder.Entity("DAB_Assignment2.SiteRules", b =>
                 {
                     b.HasOne("DAB_Assignment2.Facilitys", "Facilitys")
-                        .WithOne("SiteRules")
-                        .HasForeignKey("DAB_Assignment2.SiteRules", "FacilitysPK_FcName");
+                        .WithMany()
+                        .HasForeignKey("FacilitysPK_FcName");
 
                     b.Navigation("Facilitys");
                 });
@@ -262,25 +255,12 @@ namespace DAB_Assignment2.Migrations
 
             modelBuilder.Entity("DAB_Assignment2.Bookings", b =>
                 {
-                    b.Navigation("Facilitys");
-
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("DAB_Assignment2.CityHallPersonel", b =>
                 {
-                    b.Navigation("AvailableItems");
-
                     b.Navigation("bookings");
-                });
-
-            modelBuilder.Entity("DAB_Assignment2.Facilitys", b =>
-                {
-                    b.Navigation("AvailableItems")
-                        .IsRequired();
-
-                    b.Navigation("SiteRules")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
