@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace DAB_Assignment2
 {
-    class Class1
+
+
+
+    public class Command
     {
+
     }
 }
