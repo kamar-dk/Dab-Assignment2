@@ -88,7 +88,7 @@ namespace DAB_Assignment2
                 line += "Facilit navn: " + f.FcName;
                 while (line.Length < 64)
                 {
-                    //line += ' ';
+                    line += ' ';
                 }
                 line += "Adress: " + f.ClosetAdress;
                 format += line + "\n"; 
@@ -195,7 +195,7 @@ namespace DAB_Assignment2
 
             Bookings b2 = new Bookings()
             {
-                User = u1,
+                User = u2,
                 Facilitys = f3,
                 BookedFrom = new DateTime(2022, 12, 11, 8, 30, 00),
                 BookedTo = new DateTime(2022, 12, 11, 23, 30, 00)

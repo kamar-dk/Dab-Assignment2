@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAB_Assignment2.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221110114354_test4")]
-    partial class test4
+    [Migration("20221110152333_Del1")]
+    partial class Del1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,10 +32,6 @@ namespace DAB_Assignment2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"), 1L, 1);
 
-                    b.Property<string>("BookedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("BookedFrom")
                         .HasColumnType("datetime2");
 
@@ -47,10 +43,6 @@ namespace DAB_Assignment2.Migrations
 
                     b.Property<int>("FacilitysFcId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -130,10 +122,6 @@ namespace DAB_Assignment2.Migrations
                 {
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CVR")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()

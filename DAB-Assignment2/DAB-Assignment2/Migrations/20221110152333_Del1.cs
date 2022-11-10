@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAB_Assignment2.Migrations
 {
-    public partial class test1 : Migration
+    public partial class Del1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,8 +49,7 @@ namespace DAB_Assignment2.Migrations
                     UserName = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CVR = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    UserType = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,12 +62,10 @@ namespace DAB_Assignment2.Migrations
                 {
                     BookingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BookedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FacilitysFcId = table.Column<int>(type: "int", nullable: false),
                     BookedFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BookedTo = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CityHallPersonelEmpId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
