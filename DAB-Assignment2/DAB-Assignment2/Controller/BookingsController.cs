@@ -9,13 +9,20 @@ using DAB_Assignment2.Model;
 
 namespace DAB_Assignment2.Controller
 {
-    public class BookingsController
+    public class BookingsController : IController<Bookings>
     {
         private Context _context;
 
         public BookingsController(Context context)
         {
             _context = context;
+        }
+
+        public bool Add(Bookings ent)
+        {
+            _context.Bookings.Add(ent);
+            _context.SaveChanges();
+            return true;
         }
 
         public Bookings? Get(long id)

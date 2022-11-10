@@ -18,6 +18,13 @@ namespace DAB_Assignment2.Controller
             _context = context;
         }
 
+        public bool Add(User ent)
+        {
+            _context.Users.Add(ent);
+            _context.SaveChanges();
+            return true;
+        }
+
         public User? Get(long id)
         {
             return _context.Users.Find(id);

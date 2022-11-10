@@ -50,10 +50,7 @@ namespace DAB_Assignment2
             return false;
         }
 
-        private void SetDummyData()
-        {
-
-        }
+        
 
         public void GetFacilitysWithAdress()
         {
@@ -126,7 +123,86 @@ namespace DAB_Assignment2
                 format += line + "\n";
                 _ui.write(format);
             }   
+        }
 
+        private void SetDummyData()
+        {
+            Facilitys f1 = new Facilitys()
+            {
+                FcName = "Uni parken",
+                ClosetAdress = "test",
+                FcType = "Park",
+                CanBeBookedBy = "Alle",
+                FacilityDecrtiption = "bla"
+            };
+            Facilitys f2 = new Facilitys()
+            {
+                FcName = "Bla bålplads",
+                ClosetAdress = "Bla vej",
+                FcType = "Bålplads",
+                CanBeBookedBy = "Alle",
+                FacilityDecrtiption = "test test"
+            };
+            Facilitys f3 = new Facilitys()
+            {
+                FcName = "test bålsted",
+                ClosetAdress = " bla bla vej",
+                FcType = "Bålplads",
+                CanBeBookedBy = "Alle",
+                FacilityDecrtiption = "bla bla bla"
+            };
+
+            _facilitysController.Add(f1);
+            _facilitysController.Add(f2);
+            _facilitysController.Add(f3);
+
+            User u1 = new User()
+            {
+                UserName = "Kasper",
+                UserEmail = "test@test.dk",
+                UserType = "Privat",
+                PhoneNumber = "61667230"
+                
+            };
+
+            User u2 = new User()
+            {
+                UserName = "Lasse",
+                UserEmail = "Lasse@test.dk",
+                UserType = "Privat",
+                PhoneNumber = "12547869"
+            };
+
+            User u3 = new User()
+            {
+                UserName = "Trine",
+                UserEmail = "Trine@test.dk",
+                UserType = "Privat",
+                PhoneNumber = "61658745"
+            };
+
+            _userController.Add(u1);
+            _userController.Add(u2);
+            _userController.Add(u3);
+
+            Bookings b1 = new Bookings()
+            {
+                User = u1,
+                Facilitys = f1,
+                BookedFrom = new DateTime(2022, 11, 11, 8, 30, 00),
+                BookedTo = new DateTime(2022, 11, 11, 23, 30, 00)
+            };
+
+            Bookings b2 = new Bookings()
+            {
+                User = u1,
+                Facilitys = f3,
+                BookedFrom = new DateTime(2022, 12, 11, 8, 30, 00),
+                BookedTo = new DateTime(2022, 12, 11, 23, 30, 00)
+            };
+
+            _bookingsController.Add(b1);
+            _bookingsController.Add(b2);
         }
     }
 }

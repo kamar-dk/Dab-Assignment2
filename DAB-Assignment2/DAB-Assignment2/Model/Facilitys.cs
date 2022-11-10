@@ -9,7 +9,7 @@ namespace DAB_Assignment2.Model
 {
     public class Facilitys
     {
-        public int FcId { get; set; }
+        [Key] public int FcId { get; set; }
         public string FcName { get; set; } 
         public string ClosetAdress { get; set; }
         public string FcType { get; set; }

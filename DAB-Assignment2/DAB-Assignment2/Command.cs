@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 namespace DAB_Assignment2
 {
 
-
-
     public class Command
     {
 

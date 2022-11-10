@@ -10,7 +10,7 @@ namespace DAB_Assignment2.Controller
     {
         T? Get(long id);
         List<T> GetAll();
-        //bool Add(T ent);
+        bool Add(T ent);
         //bool Delete(long id);
 
     }

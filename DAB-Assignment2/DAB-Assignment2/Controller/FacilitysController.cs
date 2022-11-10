@@ -18,6 +18,14 @@ namespace DAB_Assignment2.Controller
             _context = context;
         }
 
+        public bool Add(Facilitys facility)
+        {
+            _context.Facilitys.Add(facility);
+            _context.SaveChanges();
+
+            return true;
+        }
+
         public Facilitys? Get(long id)
         {
             throw new NotImplementedException();
