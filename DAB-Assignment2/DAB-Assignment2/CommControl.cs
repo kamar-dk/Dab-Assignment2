@@ -124,6 +124,7 @@ namespace DAB_Assignment2
                 _ui.write(format);
             }   
         }
+        
 
         private void SetDummyData()
         {
