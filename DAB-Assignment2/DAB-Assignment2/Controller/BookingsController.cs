@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAB_Assignment2.Controller;
 using DAB_Assignment2.Data;
 using DAB_Assignment2.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAB_Assignment2.Controller
 {
@@ -16,6 +17,19 @@ namespace DAB_Assignment2.Controller
         public BookingsController(Context context)
         {
             _context = context;
+        }
+        public void AddAttendee(long cpr, int bookingId)
+        {
+            if (_context.Attendees.FirstOrDefault(a => a.cprNr == cpr) == null)
+            {
+                var a = _context.Attendees.Add(new Attendee()
+                { cprNr = cpr });
+                _context.SaveChanges();
+            }
+
+            var add = _context.Attendees.FirstOrDefault(a => a.cprNr == cpr);
+            var b = _context.Bookings.Include(book => book.Attendees).FirstOrDefault(b => b.BookingId == bookingId);
+            b.Attendees.Add(add);
         }
 
         public bool Add(Bookings ent)

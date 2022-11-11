@@ -128,6 +128,37 @@ namespace DAB_Assignment2
                 _ui.write(format);
             }   
         }
+
+        public void GetBookingsAndCPR()
+        {
+            List<Bookings> bookings = _context.Bookings.ToList();
+
+            foreach(var b in bookings)
+            {
+                _context.Entry(b).Reference(book => book.Facilitys).Load();
+                _context.Entry(b).Reference(book => book.User).Load();
+                _context.Entry(b).Collection(book => book.Attendees).Load();
+
+                string format = "";
+
+                string line = "";
+                line += "Facilitet navn; " + b.Facilitys.FcName;
+                while (line.Length < 30)
+                {
+                    line += ' ';
+                }
+                line += "Booket fra: " + b.BookedFrom + " Til: " + b.BookedTo;
+                format += line + "\n";
+
+                _ui.write(format);
+                format = "Participants: \n";
+                foreach (var a in b.Attendees)
+                {
+                    format += "CPR Nr: " + a.cprNr + "\n";
+                }
+                _ui.write(format);
+            }
+        }
         
 
         private void SetDummyData()
@@ -169,6 +200,7 @@ namespace DAB_Assignment2
 
             User u1 = new User()
             {
+                CPR = 1587896584,
                 UserName = "Kasper",
                 UserEmail = "test@test.dk",
                 UserType = "Privat",
@@ -178,6 +210,7 @@ namespace DAB_Assignment2
 
             User u2 = new User()
             {
+                CPR = 1587895875,
                 UserName = "Lasse",
                 UserEmail = "Lasse@test.dk",
                 UserType = "Privat",
@@ -186,6 +219,7 @@ namespace DAB_Assignment2
 
             User u3 = new User()
             {
+                CPR = 1587858742,
                 UserName = "Trine",
                 UserEmail = "Trine@test.dk",
                 UserType = "Privat",
@@ -212,8 +246,22 @@ namespace DAB_Assignment2
                 BookedTo = new DateTime(2022, 12, 11, 23, 30, 00)
             };
 
-            _bookingsController.Add(b1);
-            _bookingsController.Add(b2);
+            _context.Bookings.Add(b1);
+            _context.Bookings.Add(b2);
+            _context.SaveChanges();
+
+            long cprnr1 = 1587458965;
+            long cprnr2 = 1587548569;
+            long cprnr3 = 5725987456;
+
+            var b = _context.Bookings.FirstOrDefault(book => book.Facilitys == b1.Facilitys);
+            _bookingsController.AddAttendee((cprnr1), b.BookingId);
+            b = _context.Bookings.FirstOrDefault(book => book.Facilitys == b2.Facilitys);
+            _bookingsController.AddAttendee((cprnr2), b.BookingId);
+            _bookingsController.AddAttendee((cprnr3), b.BookingId);
+            _context.SaveChanges();
+
+
         }
     }
 }
