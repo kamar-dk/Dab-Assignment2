@@ -136,9 +136,10 @@ namespace DAB_Assignment2
                 .ToList();
 
             string format = "";
-            string line = "";
+            
             foreach(var m in main)
             {
+                string line = "";
                 line += "Maintance Id: " + m.Id;
                 while (line.Length < 20)
                 {
