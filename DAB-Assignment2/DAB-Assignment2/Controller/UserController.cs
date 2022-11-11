@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAB_Assignment2.Controller;
-using DAB_Assignment2.Data;
+﻿using DAB_Assignment2.Data;
 using DAB_Assignment2.Model;
 
 namespace DAB_Assignment2.Controller
@@ -18,9 +12,9 @@ namespace DAB_Assignment2.Controller
             _context = context;
         }
 
-        public bool Add(User ent)
+        public bool Add(User user)
         {
-            _context.Users.Add(ent);
+            _context.Users.Add(user);
             _context.SaveChanges();
             return true;
         }

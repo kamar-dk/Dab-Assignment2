@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAB_Assignment2.Model
 {
+    /*
     public class CityHallPersonel
     {
         [Key] public int EmpId { get; set; }
@@ -14,4 +15,5 @@ namespace DAB_Assignment2.Model
         public List<Bookings> bookings { get; set; } // navi prop
         public string EmpName { get; set; }
     }
+    */
 }

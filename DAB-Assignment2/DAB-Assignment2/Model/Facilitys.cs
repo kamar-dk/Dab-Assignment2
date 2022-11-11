@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DAB_Assignment2.Model
 {
@@ -20,5 +15,6 @@ namespace DAB_Assignment2.Model
         public string? FcRule { get; set; } = null;
         public string? FcItems { get; set; } = null;
         public List<Bookings> Bookings { get; set; } = new();
+        public List<Maintenance> MainHistory { get; set; } = new();
     }
 }

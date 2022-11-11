@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace DAB_Assignment2.UI
 {
     public class Ui
@@ -29,10 +24,10 @@ namespace DAB_Assignment2.UI
 
         public void ShowMenu()
         {
-            write("Kommandoer:\n");
-            write("F = Vis alle faciliteter med navn og nærmeste adress");
-            write("T = Vis alle faciliter i en tabel med navn, adresse og type");
-            write("B = Se all faciliter der er booket med brugernavn og tidslot");
+            /*write("Kommandoer:\n");
+            write("Q1 = Vis alle faciliteter med navn og gps");
+            write("Q2 = Vis alle faciliter i en tabel med navn, gps og type");
+            write("Q3 = Se all faciliter der er booket med brugernavn og tidslot");*/
         }
     }
 }

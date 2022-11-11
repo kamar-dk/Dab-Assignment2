@@ -35,8 +35,4 @@
     <None Include="C:\Users\tigri\Documents\GitHub\Dab-Assignment2\DAB-Assignment2\DAB-Assignment2\.editorconfig" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

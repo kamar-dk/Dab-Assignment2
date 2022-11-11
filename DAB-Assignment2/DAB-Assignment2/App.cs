@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAB_Assignment2.UI;
-using Microsoft.EntityFrameworkCore;
+﻿using DAB_Assignment2.UI;
 
 namespace DAB_Assignment2
 {
@@ -27,6 +21,8 @@ namespace DAB_Assignment2
             _ui.write("For at vise alle faciliter med adreese indtast 'Q1'");
             _ui.write("For at vise alle faciliteter ordnet efter type indtast 'Q2'");
             _ui.write("For at få vist alle bookings indtast 'Q3'");
+            _ui.write("For at få vist bookings med deltager indtast 'Q4'");
+            _ui.write("For at se vedligeholdelse indtast 'Q5'");
 
             string command = "";
 
@@ -52,6 +48,14 @@ namespace DAB_Assignment2
             if (command == "Q3")
             {
                 _commControl.GetBookings();
+            }
+            if(command == "Q4")
+            {
+                _commControl.GetBookingsAndCPR();
+            }
+            if (command == "Q5")
+            {
+                _commControl.GetMainHistory();
             }
         }
     }

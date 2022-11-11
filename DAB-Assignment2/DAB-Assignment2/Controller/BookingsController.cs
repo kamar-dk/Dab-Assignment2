@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAB_Assignment2.Controller;
-using DAB_Assignment2.Data;
+﻿using DAB_Assignment2.Data;
 using DAB_Assignment2.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,24 +12,23 @@ namespace DAB_Assignment2.Controller
         {
             _context = context;
         }
-
-        public void AddAttendee(long cpr, int BookingId)
+        public void AddAttendee(long cpr, int bookingId)
         {
-            if (_context.Attendees.FirstOrDefault(a => a.CPR == cpr) == null)
+            if (_context.Attendees.FirstOrDefault(a => a.cprNr == cpr) == null)
             {
-                var p = _context.Attendees.Add(new Attendee()
-                { CPR = cpr });
+                var a = _context.Attendees.Add(new Attendee()
+                { cprNr = cpr });
                 _context.SaveChanges();
             }
 
-            var add = _context.Attendees.FirstOrDefault(a => a.CPR == cpr);
-            var b = _context.Bookings.Include(B => B.Attendees).FirstOrDefault(b => b.BookingId == BookingId);
+            var add = _context.Attendees.FirstOrDefault(a => a.cprNr == cpr);
+            var b = _context.Bookings.Include(book => book.Attendees).FirstOrDefault(b => b.BookingId == bookingId);
             b.Attendees.Add(add);
         }
 
-        public bool Add(Bookings ent)
+        public bool Add(Bookings bookings)
         {
-            _context.Bookings.Add(ent);
+            _context.Bookings.Add(bookings);
             _context.SaveChanges();
             return true;
         }
