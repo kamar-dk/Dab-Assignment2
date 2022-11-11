@@ -11,7 +11,9 @@ namespace DAB_Assignment2.Model
     {
         [Key] public int FcId { get; set; }
         public string FcName { get; set; } 
-        public string ClosetAdress { get; set; }
+        //public string ClosetAdress { get; set; }
+        public double GPS_lon { get; set; }
+        public double GPS_lat { get; set; }
         public string FcType { get; set; }
         public string CanBeBookedBy { get; set; }
         public string FacilityDecrtiption { get; set; }

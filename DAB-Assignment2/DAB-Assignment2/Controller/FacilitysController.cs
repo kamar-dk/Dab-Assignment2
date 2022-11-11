@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAB_Assignment2.Controller;
 using DAB_Assignment2.Model;
 using DAB_Assignment2.Data;
+using GeoCoordinatePortable;
 
 namespace DAB_Assignment2.Controller
 {
@@ -20,6 +21,8 @@ namespace DAB_Assignment2.Controller
 
         public bool Add(Facilitys facility)
         {
+            GeoCoordinate check = new GeoCoordinate(facility.GPS_lat, facility.GPS_lon);
+
             _context.Facilitys.Add(facility);
             _context.SaveChanges();
 

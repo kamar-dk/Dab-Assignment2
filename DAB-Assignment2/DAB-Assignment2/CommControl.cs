@@ -64,7 +64,9 @@ namespace DAB_Assignment2
                 {
                     line += ' ';
                 }
-                line += "Adress: " + f.ClosetAdress;
+                //line += "Adress: " + f.ClosetAdress;
+                line += "Lat: " + String.Format("{0:0.000}", f.GPS_lat) + " ";
+                line += "Lon: " + String.Format("{0:0.000}", f.GPS_lon) + " ";
                 format += line + "\n";
             }
             _ui.write(format);
@@ -90,7 +92,9 @@ namespace DAB_Assignment2
                 {
                     line += ' ';
                 }
-                line += "Adress: " + f.ClosetAdress;
+                //line += "Adress: " + f.ClosetAdress;
+                line += "Lat: " + String.Format("{0:0.000}", f.GPS_lat) + " ";
+                line += "Lon: " + String.Format("{0:0.000}", f.GPS_lon);
                 format += line + "\n"; 
             }
             _ui.write(format);
@@ -131,7 +135,9 @@ namespace DAB_Assignment2
             Facilitys f1 = new Facilitys()
             {
                 FcName = "Uni parken",
-                ClosetAdress = "test",
+                //ClosetAdress = "test",
+                GPS_lat = 56.87,
+                GPS_lon = 21.20,
                 FcType = "Park",
                 CanBeBookedBy = "Alle",
                 FacilityDecrtiption = "bla"
@@ -139,7 +145,9 @@ namespace DAB_Assignment2
             Facilitys f2 = new Facilitys()
             {
                 FcName = "Bla bålplads",
-                ClosetAdress = "Bla vej",
+                //ClosetAdress = "Bla vej",
+                GPS_lat = 57.87,
+                GPS_lon = 22.20,
                 FcType = "Bålplads",
                 CanBeBookedBy = "Alle",
                 FacilityDecrtiption = "test test"
@@ -147,7 +155,9 @@ namespace DAB_Assignment2
             Facilitys f3 = new Facilitys()
             {
                 FcName = "test bålsted",
-                ClosetAdress = " bla bla vej",
+                //ClosetAdress = " bla bla vej",
+                GPS_lat = 54.87,
+                GPS_lon = 23.20,
                 FcType = "Bålplads",
                 CanBeBookedBy = "Alle",
                 FacilityDecrtiption = "bla bla bla"
