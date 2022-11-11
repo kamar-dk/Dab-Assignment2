@@ -32,9 +32,9 @@ namespace DAB_Assignment2.Controller
             b.Attendees.Add(add);
         }
 
-        public bool Add(Bookings ent)
+        public bool Add(Bookings bookings)
         {
-            _context.Bookings.Add(ent);
+            _context.Bookings.Add(bookings);
             _context.SaveChanges();
             return true;
         }

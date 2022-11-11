@@ -61,9 +61,6 @@ namespace DAB_Assignment2.Migrations
                     b.Property<DateTime>("BookedTo")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CityHallPersonelEmpId")
-                        .HasColumnType("int");
-
                     b.Property<int>("FacilitysFcId")
                         .HasColumnType("int");
 
@@ -72,33 +69,11 @@ namespace DAB_Assignment2.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.HasIndex("CityHallPersonelEmpId");
-
                     b.HasIndex("FacilitysFcId");
 
                     b.HasIndex("UserCPR");
 
                     b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("DAB_Assignment2.Model.CityHallPersonel", b =>
-                {
-                    b.Property<int>("EmpId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmpId"), 1L, 1);
-
-                    b.Property<int>("BookingId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmpName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EmpId");
-
-                    b.ToTable("cityHallPersonels");
                 });
 
             modelBuilder.Entity("DAB_Assignment2.Model.Facilitys", b =>
@@ -210,10 +185,6 @@ namespace DAB_Assignment2.Migrations
 
             modelBuilder.Entity("DAB_Assignment2.Model.Bookings", b =>
                 {
-                    b.HasOne("DAB_Assignment2.Model.CityHallPersonel", null)
-                        .WithMany("bookings")
-                        .HasForeignKey("CityHallPersonelEmpId");
-
                     b.HasOne("DAB_Assignment2.Model.Facilitys", "Facilitys")
                         .WithMany("Bookings")
                         .HasForeignKey("FacilitysFcId")
@@ -240,11 +211,6 @@ namespace DAB_Assignment2.Migrations
                         .IsRequired();
 
                     b.Navigation("Facilitys");
-                });
-
-            modelBuilder.Entity("DAB_Assignment2.Model.CityHallPersonel", b =>
-                {
-                    b.Navigation("bookings");
                 });
 
             modelBuilder.Entity("DAB_Assignment2.Model.Facilitys", b =>

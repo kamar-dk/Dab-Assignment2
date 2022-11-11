@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAB_Assignment2.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221110152333_Del1")]
-    partial class Del1
+    [Migration("20221111121639_final1")]
+    partial class final1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,31 @@ namespace DAB_Assignment2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("AttendeeBookings", b =>
+                {
+                    b.Property<long>("AttendeescprNr")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("BookingsBookingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AttendeescprNr", "BookingsBookingId");
+
+                    b.HasIndex("BookingsBookingId");
+
+                    b.ToTable("AttendeeBookings");
+                });
+
+            modelBuilder.Entity("DAB_Assignment2.Model.Attendee", b =>
+                {
+                    b.Property<long>("cprNr")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("cprNr");
+
+                    b.ToTable("Attendees");
+                });
 
             modelBuilder.Entity("DAB_Assignment2.Model.Bookings", b =>
                 {
@@ -38,45 +63,19 @@ namespace DAB_Assignment2.Migrations
                     b.Property<DateTime>("BookedTo")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CityHallPersonelEmpId")
-                        .HasColumnType("int");
-
                     b.Property<int>("FacilitysFcId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("UserCPR")
+                        .HasColumnType("bigint");
 
                     b.HasKey("BookingId");
 
-                    b.HasIndex("CityHallPersonelEmpId");
-
                     b.HasIndex("FacilitysFcId");
 
-                    b.HasIndex("UserName");
+                    b.HasIndex("UserCPR");
 
                     b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("DAB_Assignment2.Model.CityHallPersonel", b =>
-                {
-                    b.Property<int>("EmpId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmpId"), 1L, 1);
-
-                    b.Property<int>("BookingId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmpName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EmpId");
-
-                    b.ToTable("cityHallPersonels");
                 });
 
             modelBuilder.Entity("DAB_Assignment2.Model.Facilitys", b =>
@@ -88,10 +87,6 @@ namespace DAB_Assignment2.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FcId"), 1L, 1);
 
                     b.Property<string>("CanBeBookedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClosetAdress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -113,15 +108,46 @@ namespace DAB_Assignment2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("GPS_lat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("GPS_lon")
+                        .HasColumnType("float");
+
                     b.HasKey("FcId");
 
                     b.ToTable("Facilitys");
                 });
 
+            modelBuilder.Entity("DAB_Assignment2.Model.Maintenance", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("EmpName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FacilitysFcId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("MainDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacilitysFcId");
+
+                    b.ToTable("Maintenance");
+                });
+
             modelBuilder.Entity("DAB_Assignment2.Model.User", b =>
                 {
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("CPR")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -131,21 +157,36 @@ namespace DAB_Assignment2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserName");
+                    b.HasKey("CPR");
 
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("AttendeeBookings", b =>
+                {
+                    b.HasOne("DAB_Assignment2.Model.Attendee", null)
+                        .WithMany()
+                        .HasForeignKey("AttendeescprNr")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAB_Assignment2.Model.Bookings", null)
+                        .WithMany()
+                        .HasForeignKey("BookingsBookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DAB_Assignment2.Model.Bookings", b =>
                 {
-                    b.HasOne("DAB_Assignment2.Model.CityHallPersonel", null)
-                        .WithMany("bookings")
-                        .HasForeignKey("CityHallPersonelEmpId");
-
                     b.HasOne("DAB_Assignment2.Model.Facilitys", "Facilitys")
                         .WithMany("Bookings")
                         .HasForeignKey("FacilitysFcId")
@@ -154,7 +195,7 @@ namespace DAB_Assignment2.Migrations
 
                     b.HasOne("DAB_Assignment2.Model.User", "User")
                         .WithMany("Bookings")
-                        .HasForeignKey("UserName")
+                        .HasForeignKey("UserCPR")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -163,14 +204,22 @@ namespace DAB_Assignment2.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DAB_Assignment2.Model.CityHallPersonel", b =>
+            modelBuilder.Entity("DAB_Assignment2.Model.Maintenance", b =>
                 {
-                    b.Navigation("bookings");
+                    b.HasOne("DAB_Assignment2.Model.Facilitys", "Facilitys")
+                        .WithMany("MainHistory")
+                        .HasForeignKey("FacilitysFcId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Facilitys");
                 });
 
             modelBuilder.Entity("DAB_Assignment2.Model.Facilitys", b =>
                 {
                     b.Navigation("Bookings");
+
+                    b.Navigation("MainHistory");
                 });
 
             modelBuilder.Entity("DAB_Assignment2.Model.User", b =>

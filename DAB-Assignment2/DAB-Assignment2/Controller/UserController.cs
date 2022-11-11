@@ -18,9 +18,9 @@ namespace DAB_Assignment2.Controller
             _context = context;
         }
 
-        public bool Add(User ent)
+        public bool Add(User user)
         {
-            _context.Users.Add(ent);
+            _context.Users.Add(user);
             _context.SaveChanges();
             return true;
         }
