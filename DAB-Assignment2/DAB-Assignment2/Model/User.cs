@@ -9,7 +9,8 @@ namespace DAB_Assignment2.Model
 {
     public class User
     {
-        [Key] public string UserName { get; set; }
+        [Key] public long CPR { get; set; } 
+        public string UserName { get; set; }
         public string UserEmail { get; set; }
         public string PhoneNumber { get; set; }
         public string UserType { get; set; }

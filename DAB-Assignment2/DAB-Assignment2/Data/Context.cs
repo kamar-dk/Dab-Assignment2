@@ -17,6 +17,7 @@ namespace DAB_Assignment2.Data
         public DbSet<Facilitys> Facilitys { get; set; } = default;        public DbSet<CityHallPersonel> cityHallPersonels { get; set; } = default;
         public DbSet<User> Users { get; set; } = default;
         public DbSet<Bookings> Bookings { get; set; } = default;
+        public DbSet<Attendee> Attendees { get; set; } = default!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

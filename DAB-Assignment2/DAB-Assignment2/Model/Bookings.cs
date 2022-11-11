@@ -16,5 +16,6 @@ namespace DAB_Assignment2.Model
         public DateTime BookedFrom { get; set; }
         public DateTime BookedTo { get; set; }
         //public string Note { get; set; } = null;
+        [Required] public List<Attendee> Attendees { get; set; } = new();
     }
 }

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.ConstrainedExecution;
 
 
 namespace DAB_Assignment2
@@ -169,6 +170,7 @@ namespace DAB_Assignment2
 
             User u1 = new User()
             {
+                CPR = 1234568795,
                 UserName = "Kasper",
                 UserEmail = "test@test.dk",
                 UserType = "Privat",
@@ -178,6 +180,7 @@ namespace DAB_Assignment2
 
             User u2 = new User()
             {
+                CPR = 1234587795,
                 UserName = "Lasse",
                 UserEmail = "Lasse@test.dk",
                 UserType = "Privat",
@@ -186,6 +189,7 @@ namespace DAB_Assignment2
 
             User u3 = new User()
             {
+                CPR = 1158568795,
                 UserName = "Trine",
                 UserEmail = "Trine@test.dk",
                 UserType = "Privat",
@@ -214,6 +218,18 @@ namespace DAB_Assignment2
 
             _bookingsController.Add(b1);
             _bookingsController.Add(b2);
+
+            long cpr  = 1234567892;
+            long cpr2 = 3456743256;
+            long cpr3 = 4325678654;
+
+            var b = _context.Bookings.FirstOrDefault(b => b.Facilitys == b1.Facilitys);
+            _bookingsController.AddAttendee((cpr), b.BookingId);
+            b = _context.Bookings.FirstOrDefault(b => b.Facilitys == b2.Facilitys);
+            _bookingsController.AddAttendee((cpr), b.BookingId);
+            _bookingsController.AddAttendee(cpr2, b.BookingId);
+            _bookingsController.AddAttendee(cpr3, b.BookingId);
+            _context.SaveChanges();
         }
     }
 }
