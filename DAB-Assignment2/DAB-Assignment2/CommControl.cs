@@ -129,6 +129,37 @@ namespace DAB_Assignment2
             }   
         }
 
+        public void GetMainHistory()
+        {
+            List<Maintenance> main = _context.Maintenance.Include(m => m.Facilitys)
+                .OrderBy(m => m.MainDate)
+                .ToList();
+
+            string format = "";
+            string line = "";
+            foreach(var m in main)
+            {
+                line += "Maintance Id: " + m.Id;
+                while (line.Length < 20)
+                {
+                    line += ' ';
+                }
+                line += "Ansvarliges navn: " + m.EmpName;
+                while (line.Length < 60)
+                {
+                    line += ' ';
+                }
+                line += "Facilitiet navn: " + m.Facilitys.FcName;
+                while (line.Length < 100)
+                {
+                    line += ' ';
+                }
+                line += "Dato for maintance: " + m.MainDate;
+                format += line + "\n";
+            }
+            _ui.write(format);
+        }
+        
         public void GetBookingsAndCPR()
         {
             List<Bookings> bookings = _context.Bookings.ToList();
@@ -261,7 +292,23 @@ namespace DAB_Assignment2
             _bookingsController.AddAttendee((cprnr3), b.BookingId);
             _context.SaveChanges();
 
+            Maintenance main1 = new Maintenance()
+            {
+                Facilitys = f1,
+                MainDate = new DateTime(2022, 11, 11),
+                EmpName = "Kasper Martensen"
+            };
 
+            Maintenance main2 = new Maintenance()
+            {
+                Facilitys = f3,
+                MainDate = new DateTime(2022, 6, 7),
+                EmpName = "Kasper Martensen"
+            };
+
+            _context.Maintenance.Add(main1);
+            _context.Maintenance.Add(main2);
+            _context.SaveChanges();
         }
     }
 }

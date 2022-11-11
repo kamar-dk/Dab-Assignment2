@@ -28,6 +28,7 @@ namespace DAB_Assignment2
             _ui.write("For at vise alle faciliteter ordnet efter type indtast 'Q2'");
             _ui.write("For at få vist alle bookings indtast 'Q3'");
             _ui.write("For at få vist bookings med deltager indtast 'Q4'");
+            _ui.write("For at se vedligeholdelse indtast 'Q5'");
 
             string command = "";
 
@@ -57,6 +58,10 @@ namespace DAB_Assignment2
             if(command == "Q4")
             {
                 _commControl.GetBookingsAndCPR();
+            }
+            if (command == "Q5")
+            {
+                _commControl.GetMainHistory();
             }
         }
     }

@@ -18,7 +18,7 @@ namespace DAB_Assignment2.Data
         public DbSet<User> Users { get; set; } = default;
         public DbSet<Bookings> Bookings { get; set; } = default;
         public DbSet<Attendee> Attendees { get; set; } = default!;
-
+        public DbSet<Maintenance> Maintenance { get; set; } = default!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Data Soruce=0.0.0.0, 1433; Database=Assignment2_AU682545; User ID=sa; Password=Kckm31920; TrustServerCertificate=true; ApplicationIntent=ReadWrite;");

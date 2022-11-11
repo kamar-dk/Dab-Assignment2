@@ -20,5 +20,6 @@ namespace DAB_Assignment2.Model
         public string? FcRule { get; set; } = null;
         public string? FcItems { get; set; } = null;
         public List<Bookings> Bookings { get; set; } = new();
+        public List<Maintenance> MainHistory { get; set; } = new();
     }
 }
